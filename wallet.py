@@ -64,15 +64,12 @@ def pub2addr(s):
     hash160 = ripemd160(sha256(s))
     return bytes2wif(b'\x00' + hash160)
     
-if (len(sys.argv) < 2):
-    sys.stderr.write('Private key argument required!\n')
-    sys.exit(1)
-darg = sys.argv[1]
-if (len(darg) != 64):
-    sys.stderr.write('Private key argument must have 32 hex characters!\n')
+if (len(sys.argv) < 2 or len(sys.argv[1]) != 64):
+    sys.stderr.write('Private key argument required as 64 hex characters!\n')
     sys.exit(1)
 
-dbytes = bytes.fromhex(sys.argv[1])
+darg = sys.argv[1]
+dbytes = bytes.fromhex(darg)
 print('Private key                        : %s' % darg)
 print('Private key in Wif                 : %s' % bytes2wif(dbytes))
 d = int.from_bytes(dbytes, 'big')
