@@ -2,12 +2,13 @@ import sys
 import hashlib
 
 class Point:
-    def __init__(P, x, y, p):
-        P.x = x; P.y = y; P.p = p
-    def __add__(P, Q):
-        return P.__radd__(Q)
-    def __mul__(P, x):
-        return P.__rmul__(x)
+    def __init__(P, x, y, p): P.x = x; P.y = y; P.p = p
+    def toBytesXY(self):
+        return b'\x04' + self.x.to_bytes(32, 'big') + self.y.to_bytes(32, 'big')
+    def toBytesX(self):
+        return (b'\x03' if P.x%2==1 else b'\x02') + P.x.to_bytes(32, 'big')
+    def __add__(P, Q):   return P.__radd__(Q)
+    def __mul__(P, x):   return P.__rmul__(x)
     def __rmul__(P, x):
         n = P; q = None
         for i in range(256):
@@ -16,8 +17,7 @@ class Point:
             n = n + n
         return q
     def __radd__(P, Q):
-        if Q is None:
-            return P
+        if Q is None: return P
         if P == Q:
             d = 2 * P.x
             s = pow(2 * P.y % P.p, P.p-2, P.p) * (3 * P.x ** 2) % P.p
@@ -27,10 +27,6 @@ class Point:
         x = (s ** 2 - d) % P.p
         y = (s * (P.x - x) - P.y) % P.p
         return Point(x, y, P.p)
-    def toBytesXY(self):
-        return b'\x04' + self.x.to_bytes(32, 'big') + self.y.to_bytes(32, 'big')
-    def toBytesX(self):
-        return (b'\x03' if P.x%2==1 else b'\x02') + P.x.to_bytes(32, 'big')
 
 SPEC256k1 = Point(
     x = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798,
