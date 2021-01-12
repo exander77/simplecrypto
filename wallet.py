@@ -41,14 +41,9 @@ def ripemd160(d):
     return digest.digest()
 
 def b58(d):
-    if d[0] == 0:
-        return '1' + b58(d[1:])
     B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-    x = sum([v * (256 ** i) for i, v in enumerate(d[::-1])])
     ret = ''
-    while x > 0:
-        ret = B58[x % 58] + ret
-        x = x // 58
+    while d > 0: ret = B58[d % 58] + ret; d = d // 58
     return ret
 
 SPEC256k1 = Point(
@@ -58,11 +53,10 @@ SPEC256k1 = Point(
 )
 
 def bytes2wif(p):
-    return b58(p + sha256(sha256(p))[:4])
+    return b58(int.from_bytes(p + sha256(sha256(p))[:4], 'big'))
 
 def pub2addr(s):
-    hash160 = ripemd160(sha256(s))
-    return bytes2wif(b'\x00' + hash160)
+    return '1' + bytes2wif(b'\x00' + ripemd160(sha256(s)))
     
 if (len(sys.argv) < 2 or len(sys.argv[1]) != 64):
     sys.stderr.write('Private key argument required as 64 hex characters!\n')
