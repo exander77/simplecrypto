@@ -6,12 +6,11 @@ class ECC:
     def toX(P):  return (b'\x03' if P.x%2==1 else b'\x02') + P.x.to_bytes(32, B)
     def __add__(P, Q):   return P.__radd__(Q)
     def __mul__(P, x):   return P.__rmul__(x)
-    def __rmul__(P, x):
-        n = P; q = None;
+    def __rmul__(P, x, Q = None):
         for i in range(256):
-            if x & (1 << i): q = q + n
-            n = n + n
-        return q
+            if x & (1 << i): Q = Q + P
+            P = P + P
+        return Q
     def __radd__(P, Q):
         if Q is None: return P
         if P == Q: d = 2*P.x; s = pow(2*P.y%P.p, P.p-2, P.p) * (3*P.x ** 2)%P.p
@@ -19,8 +18,7 @@ class ECC:
         x = (s ** 2-d) % P.p; y = (s*(P.x-x)-P.y)%P.p; return ECC(x, y, P.p)
 G = ECC(p = 2**256-2**32-977, x = 0x3b78ce563f89a0ed9414f5aa28ad0d96d6795f9c63,
     y = 0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c) * 2
-def b58(d): 
-    r = ''
+def b58(d, r = ''): 
     while d > 0: r = B58[d % 58] + r; d = d // 58
     return r
 def sha256(d):    h = hashlib.new('sha256');    h.update(d); return h.digest()
