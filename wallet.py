@@ -32,31 +32,20 @@ class Point:
     def toBytesX(self):
         return (b'\x03' if P.x%2==1 else b'\x02') + P.x.to_bytes(32, 'big')
 
-def sha256(d):
-    digest = hashlib.new('sha256'); digest.update(d)
-    return digest.digest()
-
-def ripemd160(d):
-    digest = hashlib.new('ripemd160'); digest.update(d)
-    return digest.digest()
-
-def b58(d):
-    B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-    ret = ''
-    while d > 0: ret = B58[d % 58] + ret; d = d // 58
-    return ret
-
 SPEC256k1 = Point(
     x = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798,
     y = 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8,
-    p = 2**256 - 2**32 - 977
-)
+    p = 2**256 - 2**32 - 977)
 
-def bytes2wif(p):
-    return b58(int.from_bytes(p + sha256(sha256(p))[:4], 'big'))
-
-def pub2addr(s):
-    return '1' + bytes2wif(b'\x00' + ripemd160(sha256(s)))
+def b58(d): 
+    B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+    r = ''
+    while d > 0: r = B58[d % 58] + r; d = d // 58
+    return r
+def sha256(d):    h = hashlib.new('sha256');    h.update(d); return h.digest()
+def ripemd160(d): h = hashlib.new('ripemd160'); h.update(d); return h.digest()
+def bytes2wif(p): return b58(int.from_bytes(p + sha256(sha256(p))[:4], 'big'))
+def pub2addr(s):  return '1' + bytes2wif(b'\x00' + ripemd160(sha256(s)))
     
 if (len(sys.argv) < 2 or len(sys.argv[1]) != 64):
     sys.stderr.write('Private key argument required as 64 hex characters!\n')
