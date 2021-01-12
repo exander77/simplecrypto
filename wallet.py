@@ -7,7 +7,7 @@ class ECC: # Secp256k1 implementation, see https://en.bitcoin.it/wiki/Secp256k1
     def __mul__(P, x): return P.__rmul__(x)#║──╦╩╩═╩╩══╗───── SimpleCrypto ───║
     def __rmul__(P, x, Q=None):            #║──╣─╔═══╗─║─ wallet.py ── v1.2 ──║
         for i in range(256): # Montgomery  #║──║─╚═══╝─╚╗─ for BitCoin (BTC) ─║
-            if x&(1<<i): Q= Q+P  # ladder  #║──║─╔════╗─║─────────────────────║
+            if x&(1<<i): Q=Q+P   # ladder  #║──║─╔════╗─║─────────────────────║
             P=P+P # scalar multiplication. #║──╣─╚════╝─║──── by eXander77 ───║
         return Q                           #║──╩╦╦═╦╦═══╝─── exander77@pm.me ─║
     def __radd__(P, Q):                    #║github.com/exander77/simplecrypto║
