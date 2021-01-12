@@ -28,7 +28,7 @@ class Point:
         y = (s * (P.x - x) - P.y) % P.p
         return Point(x, y, P.p)
 
-C = Point(
+G = Point(
     x = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798,
     y = 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8,
     p = 2**256 - 2**32 - 977)
@@ -47,7 +47,7 @@ if (len(sys.argv) < 2 or len(sys.argv[1]) != 64):
     sys.stderr.write('Private key argument required as 64 hex characters!\n')
     sys.exit(1)
 
-a = sys.argv[1]; b = bytes.fromhex(a); d = int.from_bytes(b, 'big'); P = C * d
+a = sys.argv[1]; b = bytes.fromhex(a); d = int.from_bytes(b, 'big'); P = G * d
 print('Private key                        : %s' % a)
 print('Private key in Wif                 : %s' % bytes2wif(b))
 print('Address from full public key       : %s' % pub2addr(P.toBytesXY()))
