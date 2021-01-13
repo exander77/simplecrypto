@@ -21,7 +21,7 @@ def g(d, r='', A='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'):
 def b58(d): return '1'+b58(d[1:]) if d[0]==0 else g(int.from_bytes(d, B))
 def h(d, h='sha256'): h=hashlib.new(h); h.update(d); return h.digest()
 def b2w(p): return b58(p+h(h(p))[:4])     # In memory of Hal Finney 28/Aug/2014
-def p2a(s): return b2w(b'\x00'+h(h(s), 'ripemd160'))     #The Times 03/Jan/2009
+def p2a(s): return b2w(b'\x00'+h(h(s), 'ripemd160'))    # The Times 03/Jan/2009
 if len(a)!=64: S.exit('Usage: python3'+T*3%(S.argv[0], '<'*3, h(b'').hex()))
 b=bytes.fromhex(a); d=int.from_bytes(b, B); V='Private key'; W='Address'    # B
 P=ECC(y=0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c, # T
