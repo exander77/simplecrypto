@@ -1,5 +1,5 @@
 import hashlib, sys as S; T=' %s'; U=('%32s : %s\n'*5)[:-1]; B='big'; a=input()
-class ECC: # Secp256k1: https://en.bitcoin.it/wiki/Secp256k1
+class ECC: # Secp256k1: https://en.bitcoin.it/wiki/Secp256k1 # ! EXPERIMENTAL !
     def __init__(P, x, y, p): P.x=x; P.y=y; P.p=p # Long live Satoshi Nakamoto.
     def toXY(P): return b'\x04'+P.x.to_bytes(32, B)+P.y.to_bytes(32, B)
     def toX(P): return (b'\x03' if P.x%2==1 else b'\x02')+P.x.to_bytes(32, B)
