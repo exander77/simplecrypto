@@ -26,6 +26,6 @@ if len(a)!=64: S.exit('Usage: python3'+T*3%(S.argv[0], '<'*3, h(b'').hex()))
 b=bytes.fromhex(a); d=int.from_bytes(b, B); V='Private key'; W='Address'    # B
 P=ECC(y=0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c, # T
     x=0x3b78ce563f89a0ed9414f5aa28ad0d96d6795f9c63, p=2**256-2**32-977)*2*d # C
-Y=b'\x80'; X=b'\x01';    # WIF: https://en.bitcoin.it/wiki/Wallet_import_format
+Y=b'\x80'; X=b'\x01'     # WIF: https://en.bitcoin.it/wiki/Wallet_import_format
 print(U%('%s (HEX)'%V, a, '%s (WIF XY)'%V, b2w(Y+b), '%s (WIF X)'%V, b2w(Y+b+X)
     , '%s (XY)'%W, p2a(P.toXY()), '%s (X)'%W, p2a(P.toX())))             # QED.
