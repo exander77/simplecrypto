@@ -16,7 +16,7 @@ class EC: # Secp256k1 # !!! WARNING ! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
         if P==Q: d= 2*P.x; s= pow(2*P.y % P.p, P.p-2, P.p) * (3*P.x ** 2) % P.p
         else: d= P.x+Q.x; s= pow(Q.x-P.x, P.p-2, P.p) * (Q.y-P.y) % P.p  # 4FNI
         x= (s ** 2-d) % P.p; return EC(x, (s*(P.x-x)-P.y) % P.p, P.p)   # !2KNI
-def h(d, h='sha256'): h=hashlib.new(h); h.update(d); return h.digest()   # Hash
+def h(d, h='sha256'): return hashlib.new(h,d).digest()   # Hashlib hash wrapper
 def f(d): return f(d//58)+A[d%58] if d>0 else ''  # Base58 pure integer variant 
 def e(d): return '1'+e(d[1:]) if d[0]==0 else f(int.from_bytes(d, B))  # Base58
 def w(p): return e(p+h(h(p))[:4]); # WIF    # Dedicated to Ledger leak victims.
