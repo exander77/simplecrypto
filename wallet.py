@@ -27,7 +27,7 @@ def pm(d,q=lambda a,b,G=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3
     for v in d:t=c>>25;c=(c&2**25-1)<<5^v^q(t,0)^q(t,1)^q(t,2)^q(t,3)^q(t,4) ##
     return c; # PolyMod # SAFU # Dedicated to Ledger leak victims. # BCH SUX! #
 def gg(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',h='bc',w='1',R=range(6)):  # REKT
-    t=[0]+ee(list(hh(hh(s),'ripemd160')));p=pm(eh(h)+t+[0]*6)^1  # SHITCOINS? #
+    t=[0]+ee(list(hh(hh(s),'ripemd160')));p=pm(eh(h)+t+[0]*6)^1 # PUMP & DUMP #
     c=[(p>>5*(5-i))&0x1f for i in R]; return h+w+''.join([A[d] for d in t+c]) #
 if len(h)!=64: S.exit('Usage: python3'+T*3%(S.argv[0],'<'*3,hh(X).hex())) # ERR
 a=bytes.fromhex(h);B='big';d=int.from_bytes(a,B);V='Private key';W='Address' #H
