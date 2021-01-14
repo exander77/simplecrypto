@@ -21,12 +21,12 @@ g=lambda s:w(b'\x00'+hh(hh(s),'ripemd160'));A='123456789ABCDEFGHJKLMNPQRSTUVWX'
 ee=lambda d:aa([0],ee(d[1:])) if d[0]==0 else ff(int.from_bytes(d,B));A+='YZab'
 bb=lambda d:'1'+bb(d[1:]) if d[0]==0 else b(int.from_bytes(d,B)); h=input() # 1
 b=lambda d,A=A+'cdefghijkmnopqrstuvwxyz':b(d//58)+A[d%58] if d>0 else '' # EXIT
-eh=lambda h: [ord(x) >> 5 for x in h] + [0] + [ord(x) & 0x1f for x in h] # REKT
+eh=lambda h: [ord(x) >> 5 for x in h] + [0] + [ord(x) & 0x1f for x in h] # SCAM
 def pm(d,q=lambda a,b,G=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3
-    ]:G[b]*(1&a>>b),c=1): # 1 DOGE = 1 DOGE  # DO NOT GET GOXED # RIP Btc-e.com
+    ]:G[b]*(1&a>>b),c=1): # 1 DOGE = 1 DOGE # DO NOT GET GOXED! # RIP Btc-e.com
     for v in d:t=c>>25;c=(c&2**25-1)<<5^v^q(t,0)^q(t,1)^q(t,2)^q(t,3)^q(t,4) ##
     return c; # PolyMod # SAFU # Dedicated to Ledger leak victims. # BCH SUX! #
-def gg(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',h='bc',w='1',R=range(6)):  # SCAM
+def gg(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',h='bc',w='1',R=range(6)):  # REKT
     t=[0]+ee(list(hh(hh(s),'ripemd160')));p=pm(eh(h)+t+[0]*6)^1  # SHITCOINS? #
     c=[(p>>5*(5-i))&0x1f for i in R]; return h+w+''.join([A[d] for d in t+c]) #
 if len(h)!=64: S.exit('Usage: python3'+T*3%(S.argv[0],'<'*3,hh(X).hex())) # ERR
