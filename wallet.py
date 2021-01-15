@@ -21,8 +21,8 @@ W=lambda p:M(p+h(h(p))[:4]);J=lambda d:J(d//32)+[d%32] if d>0 else [];A+='JKLM'
 M=lambda d:'1'+M(d[1:]) if d[0]==0 else I(int.from_bytes(d,B));A+='NPQRSTUVWXY'
 l=lambda a,b,G,r:G[b]*(1&a>>b)^l(a,b+1,G,r) if b<5 else r;A+='Zabcdefghijklmno'
 H=lambda h:[ord(x)>>5 for x in h]+[0]+[ord(x)&0x1f for x in h];A+='pqrstuvwxyz'
-N=lambda d:[0]+N(d[1:]) if d[0]==0 else J(int.from_bytes(d,B));C='Private key'#
-O=lambda V,G=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3]:q(V,G,1)#
+N=lambda d:[0]+N(d[1:]) if d[0]==0 else J(int.from_bytes(d,B)); C='Private key'
+O=lambda V,G=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3]: q(V,G,1)
 q=lambda V,G,c:q(V[1:],G,l(c>>25,0,G,(c&2**25-1)<<5^V[0])) if len(V) else c # 4
 def L(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',h='bc',w='1',R=range(6),t=[0]): #
     t+=N(list(g(s)));u=O(H(h)+t+[0]*6)^1 # Dedicated to Ledger leak victims.  P
