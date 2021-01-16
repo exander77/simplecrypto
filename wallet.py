@@ -1,8 +1,8 @@
 import hashlib, sys as S;N=int.from_bytes;C='Private key';D='Address';i=input()
 class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
     def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p # Long live Satoshi Nakamoto @ 2021
-    def toXY(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B) #!2KNI4FNI
-    def toX(P):return (b'\x02' if P.x%2 else b'\x03')+P.x.to_bytes(32,B) # HODL
+    def Y(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B)   # !2KNI4FNI
+    def X(P):return (b'\x02' if P.x%2 else b'\x03')+P.x.to_bytes(32,B)   # HODL
     def __add__(P,Q):return P.__radd__(Q)  #╔═════════════════════════════════╗
     def __mul__(P,x):return P.__rmul__(x)  #║──╦╩╩═╩╩══╗───── SimpleCrypto ───║
     def __rmul__(P,x,Q=None):    # 79 x 33 #║──╣─╔═══╗─║─ wallet.py ── v2.2 ──║
@@ -30,4 +30,4 @@ a=bytes.fromhex(i);B='big';d=N(a,B);X=b'\x80'+a;S=' (WIF X';e='';f=[];  # SPACE
 P=E(y=0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c, # NOP
     x=0x3b78ce563f89a0ed9414f5aa28ad0d96d6795f9c63,p=2**256-2**32-977)*2*d # LU
 print(('%32s : %s\n'*6)[:-1]%(C+' (HEX)',i,C+S+'Y)',W(X),C+S+')',W(X+b'\x01'),D
-    +' (XY)',K(P.toXY()),D+' (X)',K(P.toX()),D+' (Bech32)',L(P.toX())))   #QED.
+    +' (XY)',K(P.Y()),D+' (X)',K(P.X()),D+' (Bech32)',L(P.X())))          #QED.
