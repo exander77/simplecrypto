@@ -2,10 +2,10 @@ import hashlib, sys as S;N=int.from_bytes;C='Private key';D='Address';i=input()
 class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
     def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p # Long live Satoshi Nakamoto @ 2021
     def Y(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B)   # !2KNI4FNI
-    def X(P):return (b'\x02' if P.x%2 else b'\x03')+P.x.to_bytes(32,B)   # HODL
+    def X(P):return (b'\x03' if P.y%2 else b'\x02')+P.x.to_bytes(32,B)   # HODL
     def __add__(P,Q):return P.__radd__(Q)  #╔═════════════════════════════════╗
     def __mul__(P,x):return P.__rmul__(x)  #║──╦╩╩═╩╩══╗───── SimpleCrypto ───║
-    def __rmul__(P,x,Q=None):    # 79 x 33 #║──╣─╔═══╗─║─ wallet.py ── v2.2 ──║
+    def __rmul__(P,x,Q=None):    # 79 x 33 #║──╣─╔═══╗─║─ wallet.py ── v2.3 ──║
         for i in range(256):  # 21,000,000 #║──║─╚═══╝─╚╗─ for ₿itCoin (₿TC) ─║
             if x&(1<<i):Q+=P   # r/Bitcoin #║──║─╔════╗─║─────────────────────║
             P+=P   # The Times 03/Jan/2009 #║──╣─╚════╝─║──── by eXander77 ───║
