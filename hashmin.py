@@ -1,6 +1,6 @@
 G,C=range,len;_32,_30=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U)
-E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|x>>32-y)&_
-I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:(x>>y|x<<32+s-y)&_32-1
+E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|(x&_)>>32-y)&_
+I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:((x&_)>>y|x<<32+s-y)&_32-1
 def S(N,M):S=set();P=[n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]];return M(P)
 class md4:
     E=1;M=list(G(16))+[i%15 for i in G(0,57,4)]+[15,0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15]
@@ -39,8 +39,8 @@ class ripemd160(md5):
     def _B(S,X=G(0,256,4),Z=G(80)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d,e=S.h;v,w,x,y,z=S.h
         for i in Z:
-            a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i>>4,a,b,c,d,S.K[j],S.U,S.M[i],S.F)&_
-            v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j       ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])&_
+            a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i>>4,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
+            v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j       ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])
         S.h=[x+y+z&_ for(x,y,z)in zip(S.h[1:]+S.h[:1],[c,d,e,a,b],[y,z,v,w,x])]
 class sha1(ripemd160):
     E=0;K=md4.K[1:]+[Q(5,2,_30),0xCA62C1D6];F=[md4.F[0],md4.F[2],md4.F[1],md4.F[2]]
