@@ -1,5 +1,5 @@
 G,C=range,len;_32,_30=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U)
-E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|x>>32-y)&_32-1
+E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|x>>32-y)&_
 I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:(x>>y|x<<32+s-y)&_32-1
 def S(N,M):S=set();P=[n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]];return M(P)
 class md4:
