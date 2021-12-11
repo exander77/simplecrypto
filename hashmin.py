@@ -16,7 +16,7 @@ class md4:
     def _R(S,W,i,j,a,b,c,d,k,U,m,F):return L(a+k+F[j](b,c,d)+W[m]&_,U[i])
     def _B(S,X=G(0,256,4),Z=G(48)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d=S.h
-        for i in Z:j=i//16;a,d,c,b=d,c,b,S._R(W,i,j,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
+        for i in Z:j=i>>4;a,d,c,b=d,c,b,S._R(W,i,j,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
         S.h=[x+y&_ for(x,y)in zip(S.h,[a,b,c,d])]
 class md5(md4):
     K=[int(_32*abs((2.718281828459**((i+1)*1j)).imag)) for i in G(64)]
@@ -24,7 +24,7 @@ class md5(md4):
     F=[md4.F[0],lambda x,y,z:y^(z&(x^y)),md4.F[2],lambda x,y,z:y^(x|~z)]
     def _B(S,X=G(0,256,4),Z=G(64)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d=S.h
-        for i in Z:j=i//16;a,d,c,b=d,c,b,b+S._R(W,i,j,a,b,c,d,S.K[i],S.U,S.M[j]*i+S.A[j]&15,S.F)
+        for i in Z:j=i>>4;a,d,c,b=d,c,b,b+S._R(W,i,j,a,b,c,d,S.K[i],S.U,S.M[j]*i+S.A[j]&15,S.F)
         S.h=[x+y&_ for(x,y)in zip(S.h,[a,b,c,d])]   
 class ripemd160(md5):
     K,L=S(8,lambda P:([0]+[Q(n,2,_30)for n in P],[Q(n,3,_30)for n in P]+[0]));M=[0]*80;N=M[:]
@@ -39,7 +39,7 @@ class ripemd160(md5):
     def _B(S,X=G(0,256,4),Z=G(80)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d,e=S.h;v,w,x,y,z=S.h
         for i in Z:
-            a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i//16,a,b,c,d,S.K[j],S.U,S.M[i],S.F)&_
+            a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i>>4,a,b,c,d,S.K[j],S.U,S.M[i],S.F)&_
             v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j       ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])&_
         S.h=[x+y+z&_ for(x,y,z)in zip(S.h[1:]+S.h[:1],[c,d,e,a,b],[y,z,v,w,x])]
 class sha1(ripemd160):
