@@ -40,7 +40,7 @@ class ripemd160(md5):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d,e=S.h;v,w,x,y,z=S.h
         for i in Z:
             a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i>>4,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
-            v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j       ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])
+            v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j      ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])
         S.h=[x+y+z&_ for(x,y,z)in zip(S.h[1:]+S.h[:1],(c,d,e,a,b),(y,z,v,w,x))]
 class sha1(ripemd160):
     E=0;K=md4.K[1:]+[Q(5,2,_30),0xCA62C1D6];F=[md4.F[0],md4.F[2],md4.F[1],md4.F[2]]
