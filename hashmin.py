@@ -1,8 +1,8 @@
-G,C=range,len;_32,_30=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U)
+G,C=range,len;_32,_30=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U) # HASHMIN LIBRARY
 E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|(x&_)>>32-y)&_
 I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:((x&_)>>y|x<<32+s-y)&_32-1
 def S(N,M):S=set();P=[n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]];return M(P)
-class md4:
+class md4: # Message Digest Algorithm created by Ronald Rivest 1990, described in RFC1320.
     E=1;M=list(G(16))+[i%15 for i in G(0,57,4)]+[15,0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15]
     H=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476];K=[0,Q(2,2,_30),Q(3,2,_30)]
     U=[3,7,11,19]*4+[3,5,9,13]*4+[3,9,11,15]*4
@@ -18,7 +18,7 @@ class md4:
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d=S.h
         for i in Z:j=i>>4;a,d,c,b=d,c,b,S._R(W,i,j,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
         S.h=[x+y&_ for(x,y)in zip(S.h,(a,b,c,d))]
-class md5(md4):
+class md5(md4): # Created by Ronald Rivest 1992, described in RFC1321.
     K=[int(_32*abs((2.718281828459**((i+1)*1j)).imag)) for i in G(64)]
     U=[7,12,17,22]*4+[5,9,14,20]*4+[4,11,16,23]*4+[6,10,15,21]*4;M,A=[1,5,3,7],[0,1,5,0]
     F=[md4.F[0],lambda x,y,z:y^(z&(x^y)),md4.F[2],lambda x,y,z:y^(x|~z)]
@@ -26,7 +26,7 @@ class md5(md4):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d=S.h
         for i in Z:j=i>>4;a,d,c,b=d,c,b,b+S._R(W,i,j,a,b,c,d,S.K[i],S.U,S.M[j]*i+S.A[j]&15,S.F)
         S.h=[x+y&_ for(x,y)in zip(S.h,(a,b,c,d))]   
-class ripemd160(md5):
+class ripemd160(md5): # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996)
     K,L=S(8,lambda P:([0]+[Q(n,2,_30)for n in P],[Q(n,3,_30)for n in P]+[0]));M=[0]*80;N=M[:]
     H=md5.H+[0xC3D2E1F0];X=lambda X,n:[7,4,13,1,10,6,15,3,12,0,9,5,2,14,11,8][X[n-16]]
     F=[md5.F[2],md5.F[0],lambda x,y,z:md5.F[3](x,z,y),md5.F[1],lambda x,y,z:md5.F[3](y,x,z)]
@@ -42,14 +42,15 @@ class ripemd160(md5):
             a,e,d,c,b=e,d,L(c,10),b,e+S._R(W,i,j:=i>>4,a,b,c,d,S.K[j],S.U,S.M[i],S.F)
             v,z,y,x,w=z,y,L(x,10),w,z+S._R(W,i,j      ,v,w,x,y,S.L[j],S.V,S.N[i],S.F[::-1])
         S.h=[x+y+z&_ for(x,y,z)in zip(S.h[1:]+S.h[:1],(c,d,e,a,b),(y,z,v,w,x))]
-class sha1(ripemd160):
-    E=0;K=md4.K[1:]+[Q(5,2,_30),0xCA62C1D6];F=[md4.F[0],md4.F[2],md4.F[1],md4.F[2]]
+class sha0(ripemd160): # National Security Agency 1993
+    E=0;K=md4.K[1:]+[Q(5,2,_30),0xCA62C1D6];F=[md4.F[0],md4.F[2],md4.F[1],md4.F[2]];D=0
     def _B(S,X=G(0,256,4),Y=G(16,80),Z=G(80)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X]+[0]*64;S.C=S.C[64:];a,b,c,d,e=S.h
-        for i in Y:W[i]=L(W[i-3]^W[i-8]^W[i-14]^W[i-16],1)
+        for i in Y:W[i]=L(W[i-3]^W[i-8]^W[i-14]^W[i-16],S.D)
         for i in Z:j=i//20;e,d,c,b,a=d,c,L(b,30),a,L(a,5)+S.F[j](b,c,d)+e+S.K[j]+W[i]&_
         S.h=[x+y&_ for(x,y)in zip(S.h,(a,b,c,d,e))]
-class sha256(md4):
+class sha1(sha0):D=1 # National Security Agency 1995
+class sha256(md4): # National Security Agency 2001
     E=0;H,K=S(312,lambda P:([Q(n,2,_32)for n in P[:8]],[Q(n,3,_32)for n in P]))
     def _B(S,X=G(0,256,4),Y=G(48),Z=G(64),_R=lambda x,a,b,c,s=0:R(x,a)^R(x,b)^R(x,c,s)):
         W=[I(S.C[:64][i:i+4],S.E)for i in X];S.C=S.C[64:];a,b,c,d,e,f,g,h=S.h
@@ -58,4 +59,4 @@ class sha256(md4):
             t=h+_R(e,6,11,25)+(e&f^~e&g)+S.K[i]+W[i]
             h,g,f,e,d,c,b,a=g,f,e,d+t&_,c,b,a,t+_R(a,2,13,22)+(a&b^a&c^b&c)&_
         S.h=[x+y&_ for(x,y)in zip(S.h,(a,b,c,d,e,f,g,h))]
-def new(h,d):return{'md4':md4,'md5':md5,'ripemd160':ripemd160,'sha1':sha1,'sha256':sha256}[h](d)
+def new(h,d):return{'md4':md4,'md5':md5,'ripemd160':ripemd160,'sha0':sha0,'sha1':sha1,'sha256':sha256}[h](d)
