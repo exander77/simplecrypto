@@ -32,6 +32,6 @@ class sha256(ripemd160): # National Security Agency 2001 # Dread Pirate Roberts 
         for i in Y:x,y=W[i+1],W[i+14];W[i+16]=W[i]+R(x,7,18,3)+W[i+9]+R(y,17,19,10) # DOGE
         for i in Z: # Do you know what C in NSA means? Constitution... # Luna -100% REKT #
             t=h+R(e,6,11,25,0)+(e&f^~e&g)+S.K[i]+W[i] # Linus Torvald & Richard Stallman #
-            h,g,f,e,d,c,b,a=g,f,e,d+t&_,c,b,a,t+R(a,2,13,22,0)+(a&b^a&c^b&c) # haswal.py #
+            h,g,f,e,d,c,b,a=g,f,e,d+t&_,c,b,a,t+R(a,2,13,22,0)+(a&b^a&c^b&c) ## hashwal.py
         S.h=[x+y&_ for(x,y)in zip(S.h,(a,b,c,d,e,f,g,h))] # by eXander77 exander77@pm.me #
 def new(h,d):return{'ripemd160':ripemd160,'sha256':sha256}[h](d) # for Satoshin Nakamoto #
