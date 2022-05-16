@@ -18,7 +18,7 @@ class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996
     U+=[13,6,7,14,9,13,15,14,8,13,6,5,12,7,5,11,12,14,15,14,15,9,8,9,14,5,6,8,6,5,12,9,15]
     V=[8,9,9,11,13,15,15,5,7,7,8,11,14,14,12,6,9,13,15,7,12,8,9,11,7,7,12,7,6,15,13,11,9]#
     V+=[7,15,11,8,6,6,14,12,13,5,14,13,13,7,5,15,5,8,11,14,14,6,14,6,9,12,9,12,5,15,8,8,5]
-    U+=[5,11,6,8,13,12,5,12,13,14,11,8,5,6];V+=[12,9,12,5,14,6,8,13,6,5,15,13,11,11] # BTC
+    U+=[5,11,6,8,13,12,5,12,13,14,11,8,5,6];V+=[12,9,12,5,14,6,8,13,6,5,15,13,11,11] # ₿TC
     def _B(S,W,X,Z=G(80)): # Where are the values from U and V coming from? # Hal Finney #
         a,b,c,d,e=S.h;v,w,x,y,z=S.h # Edward Snowden & Julian Assange & Chelsea Manning #L
         for i in Z: # Do you know what is the difference between a government employee? #U

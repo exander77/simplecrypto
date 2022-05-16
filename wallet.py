@@ -30,4 +30,4 @@ a=bytes.fromhex(i);B='big';d=N(a,B);X=b'\x80'+a;S=' (WIF X';e='';f=[] # MOONBOY
 P=E(y=0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c, # NOP
     x=0x3b78ce563f89a0ed9414f5aa28ad0d96d6795f9c63,p=2**256-2**32-977)*2*d # LU
 print(('%32s : %s\n'*6)[:-1]%(C+' (HEX)',i,C+S+'Y)',W(X),C+S+')',W(X+b'\x01'),D
-    +' (XY)',K(P.Y()),D+' (X)',K(P.X()),D+' (Bech32)',L(P.X())))  # SPACE #QED.
+    +' (XY)',K(P.Y()),D+' (X)',K(P.X()),D+' (Bech32)',L(P.X()))) # SPACE # QED.
