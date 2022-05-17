@@ -16,8 +16,8 @@ class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p # 1 DOGE = 1 DOGE
         x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p) # Time for Plan ₿ ?!
 h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')#
-M=lambda V,A:e.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else f #
-J=lambda d,n:I(N(d,B),n)if d[0] else[0]+J(d[1:],n);K=lambda s:W(b'\x00'+g(s)) #
+M=lambda V,A:e.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else f#L
+J=lambda d,n:I(N(d,B),n)if d[0] else[0]+J(d[1:],n);K=lambda s:W(b'\x00'+g(s))#U
 l=lambda a,b,G,r:G[b]*(1&a>>b)^l(a,b+1,G,r)if b<5else r;A='123456789ABCDEFGHJK'
 H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];A+='LMNPQRSTUVWXYZa'
 O=lambda V,G=(0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3):q(V,G,1)#
