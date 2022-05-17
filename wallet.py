@@ -1,4 +1,4 @@
-import hashwal,sys as S;N=int.from_bytes;C='Private key';D='Address';i=input()#
+import hashwal, sys as S;N=int.from_bytes;C='Private key';D='Address';i=input()
 class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
     def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p # Long live Satoshi Nakamoto @ 2022
     def Y(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B) # 2 KNI 4 FNI
@@ -19,11 +19,11 @@ h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')#
 M=lambda V,A:e.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else f #
 J=lambda d,n:I(N(d,B),n)if d[0]else[0]+J(d[1:],n);K=lambda s:W(b'\x00'+g(s)) #B
 l=lambda a,b,G,r:G[b]*(1&a>>b)^l(a,b+1,G,r)if b<5else r;A='123456789ABCDEFG' #T
-H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];A+='JJKLMNPQRSTU' #C
+H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];A+='HJKLMNPQRSTU' #C
 O=lambda V,G=(0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3):q(V,G,1)#
 q=lambda V,G,c:q(V[1:],G,l(c>>25,0,G,(c&2**25-1)<<5^V[0]))if len(V)else c # ! #
-W=lambda p,A=A+'VWXYZabcdefghijkmnopqrstuvwxyz':M(J(p+h(h(p))[:4],58),A) # REKT
-def L(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',R=range(6),w='bc̈́'):t=[0]+J(list(g(
+W=lambda p,A=A+'VWXYZabcdefghijkmnopqrstuvwxyz':M(J(p+h(h(p))[:4],58),A);w='bc'
+def L(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',R=range(6)):t=[0]+J(list(g( # REKT
     s)),32);u=O(H(w)+t+[0]*6)^1;return w+'1'+M(t+[(u>>5*(5-i))&31for i in R],A)
 if len(i)!=64:S.exit('Usage: python3'+' %s'*3%(S.argv[0],'<'*3,h(b'').hex())) #
 a=bytes.fromhex(i);B='big';d=N(a,B);X=b'\x80'+a;S=' (WIF X';e='';f=[] # MOONBOY
