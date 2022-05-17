@@ -10,7 +10,7 @@ do
 done < test.keys
 
 RANDOM=777
-SEQ=1000
+SEQ=10000
 
 seq $SEQ | xargs -I{} -n 1 -P 1 /bin/bash -c "echo {} | sha256sum" | cut -d" " -f1 | while read -r key
 do

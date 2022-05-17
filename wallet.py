@@ -23,7 +23,7 @@ H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];A+='LMNPQRSTUVWXYZa'
 O=lambda V,G=(0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3):q(V,G,1)#
 q=lambda V,G,c:q(V[1:],G,l(c>>25,0,G,(c&2**25-1)<<5^V[0]))if len(V)else c;f=[]#
 W=lambda p,A=A+'bcdefghijkmnopqrstuvwxyz':M(J(p+h(h(p))[:4],58),A);w='bc';_=32#
-def L(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',R=range(6)):t=([0,0]+J(list(g(s)),
+def L(s,A='qpzry9x8gf2tvdw0s3jn54khce6mua7l',R=range(6)):t=([0]*_+J(list(g(s)),
     _))[-33:];u=O(H(w)+t+[0]*6)^1;return w+'1'+M(t+[u>>5*(5-i)&31for i in R],A)
 if len(i)!=64:S.exit('Usage: python3'+' %s'*3%(S.argv[0],'<'*3,h(b'').hex())) #
 a=bytes.fromhex(i);B='big';d=N(a,B);X=b'\x80'+a;S=' (WIF X' # Too much space? #
