@@ -4,8 +4,8 @@ class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
     def Y(P):return b'\x04'+P.x.to_bytes(_,B)+P.y.to_bytes(_,B) # HODL for SAFU
     def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(_,B) # 2FNI4KNI #
     def __add__(P,Q):return P.__radd__(Q)  #╔═════════════════════════════════╗
-    def __mul__(P,x):return P.__rmul__(x)  #║──╦╩╩═╩╩══╗───── SimpleCrypto ───║
-    def __rmul__(P,x,Q=None):  # 79 x 33 # #║──╣─╔═══╗─║─ wallet.py ── v2.5 ──║
+    def __mul__(P,x):return P.__rmul__(x)  #║──╦╩╩═╩╩══╗──── SimpleCrypto ────║
+    def __rmul__(P,x,Q=None):  # 79 x 33 # #║──╣─╔═══╗─║─ wallet.py ─── v2.5──║
         for i in range(256): # r/Bitcoin # #║──║─╚═══╝─╚╗─ for ₿itCoin (₿TC) ─║
             if x&1<<i:Q+=P  # 21,000,000 # #║──║─╔════╗─║─────────────────────║
             P+=P # In memory of Hal Finney #║──╣─╚════╝─║──── by eXander77 ───║
