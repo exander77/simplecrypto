@@ -6,7 +6,7 @@ class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996
     E=1;K,L=S(8,lambda P:([0]+[Q(n,2,_30)for n in P],[Q(n,3,_30)for n in P]+[0]));M=[0]*80
     F=[lambda x,y,z:x^y^z,lambda x,y,z:z^x&(y^z),lambda x,y,z:z^(x|~y)];N=M[:]; # GET REKT
     F+=[lambda x,y,z:y^z&(x^y)];X=lambda X,n:[7,4,13,1,10,6,15,3,12,0,9,5,2,14,11,8][X[n]]
-    F+=[lambda x,y,z:x^(y|~z)];H=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]#
+    F+=[lambda x,y,z:x^(y|~z)];H=(0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0)#
     for i in G(80):M[i],N[i]=(i,i*9+5&15)if i<16else(X(M,i-16),X(N,i-16)) # Aaron Swartz #
     U=[11,14,15,12,5,8,7,9,11,13,14,15,6,7,9,8,7,6,8,13,11,9,7,15,7,12,15,9,11,7,13,12,11]
     U+=[13,6,7,14,9,13,15,14,8,13,6,5,12,7,5,11,12,14,15,14,15,9,8,9,14,5,6,8,6,5,12,9,15]
