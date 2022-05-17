@@ -1,16 +1,15 @@
 import hashwal, sys as S;N=int.from_bytes;C='Private key';D='Address';i=input()
-class E: # Secp256k1 # In memory of Hal Finney. # Long live Satoshi Nakamoto. #
-    def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p;P.R=range(256) # HODL # The Times #
-    def Y(P):return b'\x04'+P.x.to_bytes(_,B)+P.y.to_bytes(_,B) # 03/Jan/2009 #
-    def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(_,B) # 2FNI2KNI #
-    def __rmul__(P,x,Q=None):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q
-    def __add__(P,Q):return P.__radd__(Q)#╔═══════════════════════════════════╗
-    def __mul__(P,x):return P.__rmul__(x)#║─ SimpleCrypto ─ wallet.py ─ v3.0 ─║
+class E: # Secp256k1 # Vires in Numeris. #╔═══════════════════════════════════╗
+    def __add__(P,Q):return P.__radd__(Q)#║─ SimpleCrypto ─ wallet.py ─ v3.0 ─║
     def __radd__(P,Q):  # Funds are SAFU. ║ github.com/exander77/simplecrypto ║
         if Q is None:return P # r/Bitcoin ╚═══════════════════════════════════╝
         if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*3*P.x**2%P.p # PUMP & DUMP #
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p # 1 DOGE = 1 DOGE
         x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p) # Time for Plan ₿ ?!
+    def __mul__(P,x,Q=None):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q#
+    def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p;P.R=range(256) # HODL # The Times #
+    def Y(P):return b'\x04'+P.x.to_bytes(_,B)+P.y.to_bytes(_,B) # 03/Jan/2009 #
+    def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(_,B) # 2FNI2KNI #
 h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')#
 M=lambda V,A:e.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else f#L
 J=lambda d,n:I(N(d,B),n)if d[0] else[0]+J(d[1:],n);K=lambda s:W(b'\x00'+g(s))#U
