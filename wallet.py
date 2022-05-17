@@ -5,14 +5,14 @@ class E: # Secp256k1 # !!! WARNING !! THIS WALLET GENERATOR IS EXPERIMENTAL !!!
     def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(32,B) # HODL SAFU
     def __add__(P,Q):return P.__radd__(Q)  #╔═════════════════════════════════╗
     def __mul__(P,x):return P.__rmul__(x)  #║──╦╩╩═╩╩══╗───── SimpleCrypto ───║
-    def __rmul__(P,x,Q=None):    # 79 x 33 #║──╣─╔═══╗─║─ wallet.py ── v2.4 ──║
-        for i in range(256):  # 21,000,000 #║──║─╚═══╝─╚╗─ for ₿itCoin (₿TC) ─║
-            if x&(1<<i):Q+=P   # r/Bitcoin #║──║─╔════╗─║─────────────────────║
-            P+=P   # The Times 03/Jan/2009 #║──╣─╚════╝─║──── by eXander77 ───║
-        return Q # In memory of Hal Finney #║──╩╦╦═╦╦═══╝─── exander77@pm.me ─║
+    def __rmul__(P,x,Q=None):  # 79 x 33 # #║──╣─╔═══╗─║─ wallet.py ── v2.4 ──║
+        for i in range(256): # r/Bitcoin # #║──║─╚═══╝─╚╗─ for ₿itCoin (₿TC) ─║
+            if x&1<<i:Q+=P  # 21,000,000 # #║──║─╔════╗─║─────────────────────║
+            P+=P # In memory of Hal Finney #║──╣─╚════╝─║──── by eXander77 ───║
+        return Q # The Times 03/Jan/2009 # #║──╩╦╦═╦╦═══╝─── exander77@pm.me ─║
     def __radd__(P,Q):  # Vires in Numeris #║github.com/exander77/simplecrypto║
         if Q is None:return P # BlockChain #╚═════════════════════════════════╝
-        if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*(3*P.x**2)%P.p # PUMP & DUMP
+        if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*3*P.x**2%P.p # PUMP & DUMP #
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p # 1 DOGE = 1 DOGE
         x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p) # Time for Plan ₿ ?!
 h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')#
