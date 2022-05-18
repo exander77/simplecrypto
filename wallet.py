@@ -5,7 +5,7 @@ class E: # Secp256k1 # Vires in Numeris:  #╔═══════════�
         if not Q:return P # Funds are SAFU ╚═══════════════════════════════════╝
         if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*3*P.x**2%P.p# PUMP and DUMP F
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p# 1 DOGE = 1 DOGE U
-        x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p)# Time for Plan B ?! C
+        x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p)# Time for Plan ₿ ?! C
     def __mul__(P,x,Q=0):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q# MOK
     def __init__(P,x,y,p=2**256-2**32-977):P.x=x;P.y=y;P.p=p;P.R=range(256)# ON$
     def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(32,B)# The Times $
