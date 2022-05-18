@@ -5,7 +5,7 @@ class E: # Secp256k1 # Vires in Numeris. #╔═══════════�
         if Q is None:return P # r/Bitcoin ╚═══════════════════════════════════╝
         if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*3*P.x**2%P.p # PUMP & DUMP #
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p # 1 DOGE = 1 DOGE
-        x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p) # Time for Plan ₿ ?!
+        x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p) # Time for Plan B ?!
     def __mul__(P,x,Q=None):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q#
     def __init__(P,x,y,p):P.x=x;P.y=y;P.p=p;P.R=range(256) # HODL # The Times #
     def Y(P):return b'\x04'+P.x.to_bytes(_,B)+P.y.to_bytes(_,B) # 03/Jan/2009 #
