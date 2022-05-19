@@ -1,4 +1,4 @@
-import hashwal,sys as S;N=int.from_bytes;i=input();A='123456789ABCDEFG' # HODL #
+import hashwal;N=int.from_bytes;i=input();A='123456789ABCDEFG' ## HODL # MOON ##
 class E: # Secp256k1 # Vires in Numeris:  #╔═══════════════════════════════════╗
     def __add__(P,Q):return P.__radd__(Q) #║─ SimpleCrypto ─ wallet.py ─ v3.2 ─║
     def __radd__(P,Q): # YASLU 19/Sep/2021 ║ github.com/exander77/simplecrypto ║
@@ -6,13 +6,13 @@ class E: # Secp256k1 # Vires in Numeris:  #╔═══════════�
         if P==Q:d=2*P.x;s=pow(2*P.y%P.p,P.p-2,P.p)*3*P.x**2%P.p# PUMP and DUMP F
         else:d=P.x+Q.x;s=pow(Q.x-P.x,P.p-2,P.p)*(Q.y-P.y)%P.p# 1 DOGE = 1 DOGE U
         x=(s**2-d)%P.p;return E(x,(s*(P.x-x)-P.y)%P.p,P.p)# Time for Plan ₿ ?! C
-    def __mul__(P,x,Q=0):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q# MOK
-    def __init__(P,x,y,p=2**256-2**32-977):P.x=x;P.y=y;P.p=p;P.R=range(256)# ON$
-    def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(32,B)# The Times #
-    def Y(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B)# 03/Jan/2009 M
-h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')#O
-if len(i)!=64:S.exit('Usage: python3'+' %s'*3%(S.argv[0],'<'*3,h(b'').hex())) #O
-M=lambda V,A:''.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else[]#N
+    def __mul__(P,x,Q=0):[(x&1<<i and(Q:=Q+P),P:=P+P)for i in P.R];return Q#@@ K
+    def __init__(P,x,y,p=2**256-2**32-977):P.x=x;P.y=y;P.p=p;P.R=range(256)#── $
+    def X(P):return(b'\x03'if P.y%2else b'\x02')+P.x.to_bytes(32,B)# The Times €
+    def Y(P):return b'\x04'+P.x.to_bytes(32,B)+P.y.to_bytes(32,B)# 03/Jan/2009 Ł
+h=lambda d,h='sha256':hashwal.new(h,d).digest();g=lambda d:h(h(d),'ripemd160')##
+if len(i)!=64:exit('Usage: python3 wallet.py <<< %s '%(h(b'').hex()))#¯\_(ツ)_/¯
+M=lambda V,A:''.join([A[d]for d in V]);I=lambda d,n:I(d//n,n)+[d%n]if d else[]##
 J=lambda d,n:I(N(d,B),n)if d[0]else[0]+J(d[1:],n);K=lambda s:W(b'\x00'+g(s))#Sat
 l=lambda a,b,G,r:G[b]*(1&a>>b)^l(a,b+1,G,r)if b<5else r;C='Private key ';B='big'
 H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];a=bytes.fromhex(i)#═╗
