@@ -1,5 +1,5 @@
 import hashwal;N=int.from_bytes;i=input();A='123456789ABCDEFG' ## HODL # MOON ##
-class E: # Secp256k1 # Vires in Numeris:  #╔═══════════════════════════════════╗
+class E: # Secp256k1 #  Vires in Numeris  #╔═══════════════════════════════════╗
     def __add__(P,Q):return P.__radd__(Q) #║─ SimpleCrypto ─ wallet.py ─ v3.2 ─║
     def __radd__(P,Q): # YASLU 19/Sep/2021 ║ github.com/exander77/simplecrypto ║
         if not Q:return P # Funds are SAFU ╚═══════════════════════════════════╝
