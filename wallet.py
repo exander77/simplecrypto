@@ -18,8 +18,8 @@ g(s)),32))[-33:],'bc1'+M(t+[(O(H('bc')+t+[0]*6)^1)>>5*(5-i)&31for i in range(6)]
 N=int.from_bytes;J=lambda d,n:I(N(d,B),n)if d[0]else[0]+J(d[1:],n);W=lambda p:M(
 J(p+h(h(p))[:4],58),'123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 );O=lambda V,G=(0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3):q(V,G,1)
-if len(i:=input())!=64:exit('Usage: python3 wallet.py <<< %s '%(h(b'').hex()))##
-a=bytes.fromhex(i);H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h];##
+if len(i:=input())!=64:exit('Usage: python3 wallet.py <<< %s '%(h(b'').hex()))#G
+a=bytes.fromhex(i);H=lambda h:[ord(x)>>5for x in h]+[0]+[ord(x)&31for x in h]#GO
 T='(WIF X';X=b'\x80'+a;B='big';P=E(0x3b78ce563f89a0ed9414f5aa28ad0d96d6795f9c63,
 0xc0c686408d517dfd67c2367651380d00d126e4229631fd03f8ff35eef1a61e3c)*2*N(a,B)#QED
 C='Privkey';D='Address ';print(('%32s : %s\n'*6)[:-1]%(C+'(HEX)',i,C+T+'Y)',W(X)
