@@ -10,9 +10,9 @@ ADDRXY=$(bitcoin-tool --input-type private-key --input-format hex --output-type 
 ADDRX=$(bitcoin-tool --input-type private-key --input-format hex --output-type address --output-format base58check --network bitcoin --public-key-compression compressed --input $1)
 ADDRBECH32=$(bitcoin-tool --input-type private-key --input-format hex --output-type address --output-format bech32 --network bitcoin --public-key-compression compressed --input $1)
 (cat << EOF
-               Private key (HEX) : $1
-            Private key (WIF XY) : $WIFXY
-             Private key (WIF X) : $WIFX
+                   Privkey (HEX) : $1
+                Privkey (WIF XY) : $WIFXY
+                 Privkey (WIF X) : $WIFX
                     Address (XY) : $ADDRXY
                      Address (X) : $ADDRX
                 Address (Bech32) : $ADDRBECH32

@@ -1,18 +1,17 @@
-C=len;_32,_30=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U) # HASH WAL LIBRARY v1.1 #
+C=len;_32,__=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U);O=[0]  ## HASH WAL v1.2 ##
 E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|(x&_)>>32-y)&_
 I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:((x&_)>>y|x<<32+s-y)&_32-1;G=range
 def S(N,M):S=set();P=[n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]];return M(P)
 class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996) ## BASED
-    E=1;K,L=S(8,lambda P:([0]+[Q(n,2,_30)for n in P],[Q(n,3,_30)for n in P]+[0]));M=[0]*80
-    F=[lambda x,y,z:x^y^z,lambda x,y,z:z^x&(y^z),lambda x,y,z:z^(x|~y)];N=M[:]; # GET REKT
-    F+=[lambda x,y,z:y^z&(x^y)];X=lambda X,n:[7,4,13,1,10,6,15,3,12,0,9,5,2,14,11,8][X[n]]
-    F+=[lambda x,y,z:x^(y|~z)];H=(0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0)#
+    E=1;K,L=S(8,lambda P:(O+[Q(n,2,__)for n in P],[Q(n,3,__)for n in P]+O));M=O*80;N=M[:]#
+    U=[x+5for x in[6,9,10,7,0,3,2,4,6,8,9,10,1,2,4,3,2,1,3,8,6,4,2,10,2,7,10,4,6,2,8,7,6,8
+    ,1,2,9,4,8,10,9,3,8,1,0,7,2,0,6,7,9,10,9,10,4,3,4,9,0,1,3,1,0,7,4,10,0,6,1,3,8,7,0,7,8
+    ,9,6,3,0,1]];V=[x+5for x in[3,4,4,6,8,10,10,0,2,2,3,6,9,9,7,1,4,8,10,2,7,3,4,6,2,2,7,2
+    ,1,10,8,6,4,2,10,6,3,1,1,9,7,8,0,9,8,8,2,0,10,0,3,6,9,9,1,9,1,4,7,4,7,0,10,3,3,0,7,4,7
+    ,0,9,1,3,8,1,0,10,8,6,6]];H=(0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0) #
+    F=[lambda x,y,z:x^y^z,lambda x,y,z:z^x&(y^z),lambda x,y,z:z^(x|~y),lambda x,y,z:y^z&(x
+    ^y),lambda x,y,z:x^(y|~z)];X=lambda X,n:[7,4,13,1,10,6,15,3,12,0,9,5,2,14,11,8][X[n]]#
     for i in G(80):M[i],N[i]=(i,i*9+5&15)if i<16else(X(M,i-16),X(N,i-16)) # Aaron Swartz #
-    U=[11,14,15,12,5,8,7,9,11,13,14,15,6,7,9,8,7,6,8,13,11,9,7,15,7,12,15,9,11,7,13,12,11]
-    U+=[13,6,7,14,9,13,15,14,8,13,6,5,12,7,5,11,12,14,15,14,15,9,8,9,14,5,6,8,6,5,12,9,15]
-    V=[8,9,9,11,13,15,15,5,7,7,8,11,14,14,12,6,9,13,15,7,12,8,9,11,7,7,12,7,6,15,13,11,9]#
-    V+=[7,15,11,8,6,6,14,12,13,5,14,13,13,7,5,15,5,8,11,14,14,6,14,6,9,12,9,12,5,15,8,8,5]
-    U+=[5,11,6,8,13,12,5,12,13,14,11,8,5,6];V+=[12,9,12,5,14,6,8,13,6,5,15,13,11,11] # ₿TC
     def __init__(S,m=0):S.c=0;S.C=b'';S.h=S.H[:];S.update(m)if m else 0 #@# ¯\_(ツ)_/¯ #@#
     def digest(S):S.update(S.P(S.c));return b''.join([B(i,4,S.E)for i in S.h]) # devops199
     def update(S,m): # Hashlib compatible interface with update and digest methods. Nice?#
