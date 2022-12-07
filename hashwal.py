@@ -1,7 +1,7 @@
 C=len;_32,__=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U);O=[0]  ## HASH WAL v1.2 ##
 E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|(x&_)>>32-y)&_
 I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:((x&_)>>y|x<<32+s-y)&_32-1;G=range
-def S(N,M):S=set();return M([n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]])
+S=lambda N,M,S=set():M([n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]])
 class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996) ## BASED
     E=1;K,L=S(8,lambda P:(O+[Q(n,2,__)for n in P],[Q(n,3,__)for n in P]+O));M=O*80;N=M[:]#
     U=[x+5for x in[6,9,10,7,0,3,2,4,6,8,9,10,1,2,4,3,2,1,3,8,6,4,2,10,2,7,10,4,6,2,8,7,6,8
