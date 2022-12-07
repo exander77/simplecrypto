@@ -1,8 +1,8 @@
-C=len;_32,__=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U);O=[0]  ## HASH WAL v1.2 ##
+C=len;_32,__=2**32,2**30;_=_32-1;Q=lambda n,d,U:int(n**(1/d)*U);O=[0]## HASH WAL v1.2.1 ##
 E=['big','little'];B=lambda v,b,e=0:v.to_bytes(b,E[e]);L=lambda x,y=0:(x<<y|(x&_)>>32-y)&_
 I=lambda v,e=0,:int.from_bytes(v,E[e]);R=lambda x,y,s=0:((x&_)>>y|x<<32+s-y)&_32-1;G=range
-S=lambda N,M,S=set():M([n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]])
-class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996) ## BASED
+S=lambda N,M,S=set():M([n for n in G(2,N)if not(n in S,S.update(G(n*n,N,n)))[0]])# Ukraine
+class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996) ## FTW #
     E=1;K,L=S(8,lambda P:(O+[Q(n,2,__)for n in P],[Q(n,3,__)for n in P]+O));M=O*80;N=M[:]#
     U=[x+5for x in[6,9,10,7,0,3,2,4,6,8,9,10,1,2,4,3,2,1,3,8,6,4,2,10,2,7,10,4,6,2,8,7,6,8
     ,1,2,9,4,8,10,9,3,8,1,0,7,2,0,6,7,9,10,9,10,4,3,4,9,0,1,3,1,0,7,4,10,0,6,1,3,8,7,0,7,8
@@ -14,7 +14,7 @@ class ripemd160: # Hans Dobbertin, Antoon Bosselaers and Bart Preneel 1992 (1996
     for i in G(80):M[i],N[i]=(i,i*9+5&15)if i<16else(X(M,i-16),X(N,i-16)) # Aaron Swartz #
     def __init__(S,m=0):S.c=0;S.C=b'';S.h=S.H[:];S.update(m)if m else 0 #@# ¯\_(ツ)_/¯ #@#
     def digest(S):S.update(S.P(S.c));return b''.join([B(i,4,S.E)for i in S.h]) # devops199
-    def update(S,m): # Hashlib compatible interface with update and digest methods. Nice?#
+    def update(S,m):# Hashlib compatible interface with update and digest methods. Nice? #
         S.C+=m;S.c+=C(m);X=lambda W,i,j,F,a,b,c,d,k,U,m:L(a+k+F[j](b,c,d)+W[m]&_,U[i]) # ₿
         while C(S.C)>=64:S._B([I(S.C[:64][i:i+4],S.E)for i in G(0,256,4)],X);S.C=S.C[64:]#
     def P(S,l):return b'\x80'+(b'\x00'*(119-l&63))+B(l<<3,8,S.E) # Merkle–Damgård padding.
